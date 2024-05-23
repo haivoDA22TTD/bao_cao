@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB BÁN MÈO | TRANG NGƯỜI QUẢN TRỊ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      height: 100vh;
+      width: 200px;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar a:hover {
+      background-color: #555;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    .dashboard-card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .cat-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
+
+    .cat-card {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .cat-card img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Trang Quản Trị Web bán Mèo</h2>
+    <a href="#"><i class="fas fa-tachometer-alt"></i>Bảng Điều Khiển</a>
+    <a href="#"><i class="fas fa-paw"></i> Mèo</a>
+    <a href="#"><i class="fas fa-users"></i>Khách Hàng</a>
+    <a href="#"><i class="fas fa-shopping-cart"></i>Đơn đặt hàng</a>
+    <a href="#"><i class="fas fa-chart-line"></i>Phân Tích</a>
+    <a href="#"><i class="fas fa-cog"></i> Cài Đặt</a>
+  </div>
+
+  <div class="content">
+    <div class="dashboard-card">
+      <h2>Chào mừng bạn đến với Bảng điều khiển dành cho quản trị viên Web bán mèo</h2>
+      <p>Quản lý sản phẩm mèo, khách hàng và đơn đặt hàng của bạn từ đây.</p>
+    </div>
+
+    <div class="dashboard-card">
+      <h2>Tất Cả Mèo</h2>
+      <div class="cat-list" id="cat-list"></div>
+    </div>
+  </div>
+
+  <script>
+   
+    const catListElement = document.getElementById('cat-list');
+
+    
+    const catData = [
+      {
+        id: 1,
+        name: 'Mèo Rừng Na Uy',
+        image: 'https://azpet.com.vn/wp-content/uploads/2021/06/meo-rung-na-uy.jpg',
+        price: 3000,
+        stock: 10
+      },
+      {
+        id: 2,
+        name: 'Mèo Siberian',
+        image: 'https://cdn.tgdd.vn/Files/2022/12/03/1492859/kham-pha-meo-siberian-dac-diem-cach-nuoi-gia-ban-202212050652382134.jpg',
+        price: 652.17,
+        stock: 5
+      },
+      {
+        id: 3,
+        name: 'Mèo Ba Tư',
+        image: 'https://azpet.com.vn/wp-content/uploads/2021/06/M12074-1.jpg',
+        price: 391.30,
+        stock: 15
+        
+      },
+      {
+        id: 4,
+        name: 'Mèo Bengal',
+        image: 'https://azpet.com.vn/wp-content/uploads/2021/06/M12065-1.jpg',
+        price:  652.17,
+        stock: 7
+      },
+      {
+        id: 5,
+        name: 'Mèo Ai Cập',
+        image: 'https://azpet.com.vn/wp-content/uploads/2021/06/M12110-1.jpg',
+        price: 956.52,
+        stock: 7
+      },
+      {
+        id: 6,
+        name: ' Mèo Munchkin',
+        image: 'https://azpet.com.vn/wp-content/uploads/2022/05/m12435-1.jpg',
+        price: 652.17,
+        stock: 9
+      },
+      {
+        id: 7,
+        name: ' Mèo Somail',
+        image: 'https://azpet.com.vn/wp-content/uploads/2021/06/M12109-1.jpg',
+        price: 1000,
+        stock: 19
+      },
+      {
+        id: 8,
+        name: ' Mèo Tuxedo',
+        image: 'https://azpet.com.vn/wp-content/uploads/2021/06/M12090-1.jpg',
+        price: 260.87,
+        stock: 22
+      },
+      {
+        id: 9,
+        name: ' Mèo Anh Lông Ngắn',
+        image: 'https://azpet.com.vn/wp-content/uploads/2022/08/M781-M12501-1.jpg',
+        price: 347.83,
+        stock: 8
+      },
+      {
+        id: 10,
+        name: ' Mèo Anh Lông Dài',
+        image: 'https://azpet.com.vn/wp-content/uploads/2022/03/M650-M12394-1.jpg',
+        price: 304.35,
+        stock: 8
+      },
+    ];
+
+    
+    catData.forEach(cat => {
+      const catCard = document.createElement('div');
+      catCard.classList.add('cat-card');
+
+      const img = document.createElement('img');
+      img.src = cat.image;
+      img.alt = cat.name;
+
+      const name = document.createElement('h3');
+      name.textContent = cat.name;
+
+      const price = document.createElement('p');
+      price.textContent = `$${cat.price}`;
+
+      const stock = document.createElement('p');
+      stock.textContent = `Trong Kho: ${cat.stock}`;
+
+      const editButton = document.createElement('button');
+      editButton.textContent = ' Sửa';
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Xóa';
+
+      const addButton = document.createElement('button');
+      addButton.textContent = 'Thêm';
+
+      catCard.appendChild(img);
+      catCard.appendChild(name);
+      catCard.appendChild(price);
+      catCard.appendChild(stock);
+      catCard.appendChild(editButton);
+      catCard.appendChild(deleteButton);
+      catCard.appendChild(addButton);
+
+      catListElement.appendChild(catCard);
+    });
+  </script>
+</body>
+</html>

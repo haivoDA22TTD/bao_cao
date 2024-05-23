@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <html lang="en"></html>
+  <title>WEB BÁN MÈO</title>
+  <meta charset="UTF-8">
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+#product-list {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#products {
+  list-style: none;
+  padding: 0;
+}
+
+#products li {
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+#product-details {
+  margin-bottom: 20px;
+}
+
+#product-details p {
+  margin: 5px 0;
+}
+
+#shopping-cart, #invoice-details {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#shopping-cart h2, #invoice-details h2 {
+  margin-top: 0;
+}
+
+#cart-items {
+  list-style: none;
+  padding: 0;
+
+}
+
+#cart-items li {
+  margin-bottom: 5px;
+}
+
+#cart-total {
+  text-align: right;
+  font-weight: bold;
+}
+
+#checkout {
+  display: block;
+  margin-top: 10px;
+}
+
+#checkout, #add-to-cart {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+    </style>
+</head>
+<body>
+  <h1>Danh Sách Sản Phẩm</h1>
+
+  <div id="product-list">
+    <ul id="products">
+      <!-- Sản phẩm sẽ được thêm vào đây bằng JavaScript -->
+    </ul>
+  </div>
+
+  <div id="product-details">
+    <h2>Thông Tin Sản Phẩm </h2>
+    <p><strong>Tên:</strong> <span id="product-name"></span></p>
+    <p><strong>Giá:</strong>$<span id="product-price"></span></p>
+    <button id="add-to-cart">Thêm Vào Giỏ Hàng</button>
+  </div>
+
+  <div id="shopping-cart">
+    <h2>Giỏ Hàng</h2>
+    <ul id="cart-items">
+      <!-- Các mục giỏ hàng sẽ được thêm vào đây bằng JavaScript -->
+    </ul>
+    <p id="cart-total">Thành Tiền: 0.00 $</p>
+    <button id="checkout">Thanh Toán</button>
+  </div>
+
+  <div id="invoice-details">
+    <h2>Hóa Dơn Thanh Toán</h2>
+    <p><strong>Ngày:</strong> <span id="date"></span></p>
+    <p><strong>Giờ:</strong> <span id="time"></span></p>
+    <p><strong>Nhân Viên:</strong> <span id="cashier"></span></p>
+  </div>
+    <script>
+        // Danh sách sản phẩm
+var products = [
+  { name: "Mèo Main Cool", price: 2000 },
+  { name: "Mèo Rừng Na Uy", price: 3000},
+  { name: "Mèo Ba Tư", price: 391.30 },
+  { name: "Mèo Bengal", price:  652.17 },
+  { name: "Mèo Ai Cập", price: 956.52},
+  { name: "Mèo Tuxedo", price: 260.87 },
+  { name: "Mèo Siberian ", price: 652.17},
+  { name: "Mèo Munchkin", price: 652.17},
+  { name: "Mèo Anh Lông Dài", price:304.35},
+  { name: "Mèo Anh Lông Ngắn", price:347.83},
+  { name: "Mèo Somail", price: 1000}
+];
+
+// Danh sách sản phẩm trong giỏ hàng
+var cartItems = [];
+
+// Lấy thông tin ngày, tháng, năm, giờ
+function getDateAndTime() {
+  var now = new Date();
+
+  var date = now.toLocaleDateString("en-US");
+  var time = now.toLocaleTimeString("en-US");
+
+  return { date: date, time: time };
+}
+
+// Lấy tên nhân viên thanh toán
+function getCashierName() {
+  var cashiers = ["Hoàng Dũng", "Gia Khánh", "Tiêu Trường Phát"];
+  var randomIndex = Math.floor(Math.random() * cashiers.length);
+  return cashiers[randomIndex];
+}
+
+// Hiển thị danh sách sản phẩm
+function displayProductList() {
+  var productList = document.getElementById("products");
+
+  products.forEach(function(product) {
+    var li = document.createElement("li");
+    li.textContent = product.name;
+    li.addEventListener("click", function() {
+      displayProductDetails(product);
+    });
+    productList.appendChild(li);
+  });
+}
+
+// Hiển thị thông tin chi tiết sản phẩm
+function displayProductDetails(product) {
+  var productNameElement = document.getElementById("product-name");
+  var productPriceElement = document.getElementById("product-price");
+  var addToCartButton = document.getElementById("add-to-cart");
+
+  productNameElement.textContent = product.name;
+  productPriceElement.textContent = product.price.toFixed(2);
+  addToCartButton.addEventListener("click", function() {
+    addToCart(product);
+  });
+}
+
+// Thêm sản phẩm vào giỏ hàng
+function addToCart(product) {
+  cartItems.push(product);
+  updateCart();
+}
+
+// Cập nhật giỏ hàng
+function updateCart() {
+  var cartItemsElement = document.getElementById("cart-items");
+  var cartTotalElement = document.getElementById("cart-total");
+
+  cartItemsElement.innerHTML = "";
+  var totalPrice = 0;
+
+  cartItems.forEach(function(item) {
+    var li = document.createElement("li");
+    li.textContent = item.name;
+    cartItemsElement.appendChild(li);
+    totalPrice += item.price;
+  });
+
+  cartTotalElement.textContent = "Total: $" + totalPrice.toFixed(2);
+}
+
+// Xử lý thanh toán
+function checkout() {
+  var invoiceDetailsElement = document.getElementById("invoice-details");
+  var dateElement = document.getElementById("date");
+  var timeElement = document.getElementById("time");
+  var cashierElement = document.getElementById("cashier");
+
+  var dateAndTime = getDateAndTime();
+  var cashierName = getCashierName();
+
+  dateElement.textContent = dateAndTime.date;
+  timeElement.textContent = dateAndTime.time;
+  cashierElement.textContent = cashierName;
+
+  invoiceDetailsElement.style.display = "block";
+}
+
+// Gọi các hàm khởi tạo và xử lý sự kiện
+displayProductList();
+document.getElementById("checkout").addEventListener("click", checkout);
+    </script>
+</body>
+</html>

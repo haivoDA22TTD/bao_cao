@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins'sans-serif;
+}
+body{
+    background: #000;
+    font-size: 20px;
+    color: red;
+    overflow-x: hidden;
+    margin: 0;
+}
+.dropdown{
+    float: right;
+}
+#container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .gallery {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+  }
+  .form{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+i{
+    font-size: 50px;
+}
+.logo{
+  font-size: 35px;
+  color: white;
+  border: 10px solid red;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  float: left;
+  text-align: center;
+}
+.end{
+  background: #fff;
+
+}
+.gallery button{
+  background: blue;
+  border-radius: 14px;
+  color: white;
+  font-size: 20px;
+}
+

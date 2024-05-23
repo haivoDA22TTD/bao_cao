@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEN BÁN MÈO| Thanh Toán</title>
+    <style>
+        .form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  color: #00bfff;
+}
+
+.title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 3s linear infinite;
+}
+
+.title::before,
+.title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: #00bfff;
+}
+
+.message, 
+.signin {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a:hover {
+  color:  rgb(255, 24, 24);
+}
+
+.signin a {
+  color: #00bfff;
+  text-decoration: none;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label .input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 20px 05px 05px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 12.5px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span {
+  color: #00bfff;
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.input {
+  font-size: medium;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+  background-color: #00bfff;
+}
+
+.submit:hover {
+  background-color: #ff1f23;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+    body{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        min-height: 100vh;
+        
+    }
+    </style>
+</head>
+<body>
+    <form class="form">
+    <p class="title">Thanh Toán</p>
+    <p class="message">Hãy Nhập Thông Tin Vào Đây.</p>
+        <div class="flex">
+        <label>
+            <input class="input" type="text" placeholder="" required="">
+            <span>HỌ</span>
+        </label>
+
+        <label>
+            <input class="input" type="text" placeholder="" required="">
+            <span>TÊN</span>
+        </label>
+    </div>    
+    <label>
+        <input class="input" type="email" placeholder="" required="">
+        <span>Số Lượng</span>
+    </label> 
+     <label>
+        <input class="input" type="email" placeholder="" required="">
+        <span>Số Điện Thoại</span>
+    </label> 
+        
+    <label>
+        <input class="input" type="text" placeholder="" required="">
+        <span>Địa Chỉ Nhận Hàng</span>
+    </label>
+    <label>
+        <input class="input" type="text" placeholder="" required="">
+        <span>Phương Thức Thanh Toán</span>
+    </label>
+    <button class="submit" id="buy">Thanh Toán</button>
+</form>
+<script>
+        let buy = document.getElementById('buy');
+        buy.addEventListener('click', function(){
+            alert('Sản Phẩm Đã Được Thêm Vào Hóa Đơn Thanh Toán')
+        })
+</script>
+</body>
+</html>
